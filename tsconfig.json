@@ -1,19 +1,15 @@
 {
+  "extends": "@tsconfig/node16/tsconfig.json",
   "compilerOptions": {
-    "outDir": "./dist",
+    "lib": ["es2017", "es7", "es6", "dom", "ES2021"],
     "declaration": true,
-    "declarationDir": "./dist/types",
-    "emitDeclarationOnly": true,
     "module": "ESNext",
     "target": "ES6",
     "jsx": "react-jsx",
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "skipLibCheck": true,
+    "outDir": "dist",
     "strict": true,
-    "allowSyntheticDefaultImports": true,
-    "sourceMap": true
+    "esModuleInterop": true
   },
-  "include": ["src/**/*"],
+  "include": ["config", "src/**/*"],
   "exclude": ["node_modules", "dist"]
 }
