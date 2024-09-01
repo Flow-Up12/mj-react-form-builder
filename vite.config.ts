@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/index.ts'),
+      entry: path.resolve(__dirname, 'src'),
       name: 'MjReactFormBuilder',
       formats: ['es', 'cjs', 'umd'],
       fileName: (format) => `mj-react-form-builder.${format}.js`,
