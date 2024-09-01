@@ -46,6 +46,7 @@
   },
   "packageManager": "yarn@1.22.22",
   "dependencies": {
+    "react-hook-form": "^7.53.0",
     "react-number-format": "^5.4.1"
   }
 }
