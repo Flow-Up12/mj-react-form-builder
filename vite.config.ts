@@ -6,13 +6,13 @@ export default defineConfig({
   plugins: [react()],
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/index.ts'), 
+      entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'MjReactFormBuilder',
-      formats: ['es', 'cjs', 'umd'], 
+      formats: ['es', 'cjs', 'umd'],
       fileName: (format) => `mj-react-form-builder.${format}.js`,
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],
+      external: ['react', 'react-dom', 'react/jsx-runtime'],
       output: {
         globals: {
           react: 'React',
