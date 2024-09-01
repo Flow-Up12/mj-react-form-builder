@@ -51,13 +51,13 @@ export const ContactArrayInput = ({
         {fields.map((field, index) => (
           <div key={field.id} className="border p-4 mb-4 rounded-md">
             <TextInput
-              name={`${source}[${index}].first`}
-              label="First Name"
+              source={`${source}[${index}].first`}
+              label="First source"
               required
             />
             <TextInput
-              name={`${source}[${index}].last`}
-              label="Last Name"
+              source={`${source}[${index}].last`}
+              label="Last source"
               required
             />
             <div className="flex just">
@@ -72,7 +72,7 @@ export const ContactArrayInput = ({
             </div>
             {!anonymousEmails[`${source}[${index}]`] && (
               <TextInput
-                name={`${source}[${index}].email`}
+                source={`${source}[${index}].email`}
                 label="Email"
                 type="email"
                 required
@@ -103,8 +103,8 @@ export const ContactArrayInput = ({
       <div className="p-4 mb-4 rounded-md">
         <p className="text-left text-lg font-semibold">{label}</p>
         <hr className="my-2" />
-        <TextInput name={`${source}.first`} label="First Name" required />
-        <TextInput name={`${source}.last`} label="Last Name" required />
+        <TextInput source={`${source}.first`} label="First source" required />
+        <TextInput source={`${source}.last`} label="Last source" required />
         <div className="flex items-center">
           <input
             type="checkbox"
@@ -119,14 +119,14 @@ export const ContactArrayInput = ({
         </div>
         {!anonymousEmails[source] && (
           <TextInput
-            name={`${source}.email`}
+            source={`${source}.email`}
             label="Email"
             type="email"
             required
           />
         )}
         <MaskedPhoneInput source={`${source}.phone`} />
-        <TextInput name={`${source}.title`} label="Title" required />
+        <TextInput source={`${source}.title`} label="Title" required />
         <p className="text-sm text-gray-500 text-left">{helperText}</p>
       </div>
     );
