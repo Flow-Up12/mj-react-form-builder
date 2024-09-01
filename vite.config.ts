@@ -6,9 +6,9 @@ export default defineConfig({
   plugins: [react()],
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/index.ts'), 
+      entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'MjReactFormBuilder',
-      formats: ['es', 'cjs', 'umd'], 
+      formats: ['es', 'cjs', 'umd'],
       fileName: (format) => `mj-react-form-builder.${format}.js`,
     },
     rollupOptions: {
@@ -16,7 +16,7 @@ export default defineConfig({
       output: {
         globals: {
           react: 'React',
-          'react-dom': 'ReactDOM'
+          'react-dom': 'ReactDOM',
         },
       },
     },
