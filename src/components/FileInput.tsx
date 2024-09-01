@@ -27,6 +27,8 @@ export const FileInput = ({
 
   const selectedFiles = watch(name) || [];
 
+  console.log('hi')
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const transformedFiles = Array.from(event.target.files).map((file) =>
