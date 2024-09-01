@@ -1,7 +1,3 @@
-Here's a `README.md` file that outlines how to use your `mj-react-form-builder` package:
-
----
-
 # MJ React Form Builder
 
 `mj-react-form-builder` is a customizable and reusable form component library built with React, TypeScript, and Tailwind CSS. This package provides a suite of input components, layout components, and utility functions to help developers quickly build forms with validation and consistent styling.
