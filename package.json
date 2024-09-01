@@ -1,6 +1,6 @@
 {
   "name": "mj-react-form-builder",
-  "version": "2.0.22",
+  "version": "2.0.23",
   "description": "A React form builder package using Tailwind CSS",
   "type": "module",
   "main": "dist/index.js",
