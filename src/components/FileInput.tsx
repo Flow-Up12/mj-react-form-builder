@@ -4,7 +4,7 @@ import { StrapiFormattedFile } from "../types";
 import { transformFile } from "../helpers/transformFile";
 
 interface FileInputProps {
-  name: string;
+  source: string;
   label: string;
   required?: boolean;
   multiple?: boolean;
@@ -12,7 +12,7 @@ interface FileInputProps {
 }
 
 export const FileInput = ({
-  name,
+  source,
   label,
   required = false,
   multiple = false,
@@ -25,7 +25,7 @@ export const FileInput = ({
     watch,
   } = useFormContext();
 
-  const selectedFiles = watch(name) || [];
+  const selectedFiles = watch(source) || [];
 
   console.log('hi')
 
@@ -36,16 +36,16 @@ export const FileInput = ({
       );
 
       if (multiple) {
-        setValue(name, [...selectedFiles, ...transformedFiles]);
+        setValue(source, [...selectedFiles, ...transformedFiles]);
       } else {
-        setValue(name, transformedFiles);
+        setValue(source, transformedFiles);
       }
     }
   };
 
   const handleRemoveFile = (index: number) => {
     const updatedFiles = selectedFiles.filter((_file: File, i: number) => i !== index);
-    setValue(name, updatedFiles);
+    setValue(source, updatedFiles);
   };
 
   return (
@@ -58,7 +58,7 @@ export const FileInput = ({
           </label>
           <div className="relative mt-2 block w-full text-sm mr-4 py-2 px-4 rounded border-0 font-semibold bg-blue-50 text-blue-700 cursor-pointer transition-transform duration-300 ease-in-out transform hover:bg-blue-600 hover:text-white hover:scale-105">
             <input
-               {...register(name, { 
+               {...register(source, { 
                 validate: {
                   validate: (value: StrapiFormattedFile[] | StrapiFormattedFile) => {
                     if (required) {
@@ -84,8 +84,8 @@ export const FileInput = ({
               Choose File
             </div>
           </div>
-          {errors[name] && (
-            <p className="text-red-500 text-sm mt-1 text-left">{`${errors[name]?.message}*`}</p>
+          {errors[source] && (
+            <p className="text-red-500 text-sm mt-1 text-left">{`${errors[source]?.message}*`}</p>
           )}
         </div>
         <div className="col-span-7">

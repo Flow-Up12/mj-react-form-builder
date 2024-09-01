@@ -2,7 +2,7 @@ import { useFormContext } from "react-hook-form";
 import { NumericFormat } from "react-number-format";
 
 interface NumberInputProps {
-  name: string;
+  source: string;
   label: string;
   required?: boolean;
   min?: number;
@@ -16,7 +16,7 @@ interface NumberInputProps {
 }
 
 const NumberInput = ({
-  name,
+  source,
   label,
   required = false,
   min,
@@ -34,11 +34,11 @@ const NumberInput = ({
     setValue,
     watch,
   } = useFormContext();
-  const number = watch(name);
+  const number = watch(source);
 
   const handleValueChange = (values: any) => {
     const { floatValue } = values;
-    setValue(name, floatValue);
+    setValue(source, floatValue);
   };
 
   return (
@@ -48,7 +48,7 @@ const NumberInput = ({
         {required && <span className="text-red-500 ml-1">*</span>}
       </label>
       <NumericFormat
-        {...register(name, {
+        {...register(source, {
           required: required
             ? `${label} ${requiredMessage ? requiredMessage : "is required"}`
             : false,
@@ -66,7 +66,7 @@ const NumberInput = ({
           disabled
             ? "bg-gray-100 text-gray-500 border-gray-200 cursor-not-allowed"
             : "bg-white text-gray-900 border-gray-300 focus:ring-blue-500"
-        } ${errors[name] ? "border-red-500 focus:ring-red-500" : ""}`}
+        } ${errors[source] ? "border-red-500 focus:ring-red-500" : ""}`}
         thousandSeparator={
           mask === "currency" || mask === "percentage" ? "," : undefined
         }
@@ -87,8 +87,8 @@ const NumberInput = ({
       {helperText && (
         <p className="text-gray-500 text-sm mt-1 text-left">{helperText}</p>
       )}
-      {errors[name] && (
-        <p className="text-red-500 text-sm mt-1 text-left">{`${errors[name]?.message}`}</p>
+      {errors[source] && (
+        <p className="text-red-500 text-sm mt-1 text-left">{`${errors[source]?.message}`}</p>
       )}
       {number !== undefined &&
         number !== null &&

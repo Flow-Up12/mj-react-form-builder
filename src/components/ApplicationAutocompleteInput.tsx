@@ -2,14 +2,14 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 interface AutocompleteInputProps {
-  name: string;
+  source: string;
   label: string;
   required?: boolean;
   helperText?: string;
 }
 
 const ApplicationAutocompleteInput: React.FC<AutocompleteInputProps> = ({
-  name,
+  source,
   label,
   required = false,
   helperText,
@@ -20,12 +20,12 @@ const ApplicationAutocompleteInput: React.FC<AutocompleteInputProps> = ({
   const [options, setOptions] = useState<{ value: string; label: string }[]>([]);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const selectedValue = watch(name);
+  const selectedValue = watch(source);
 
   console.log(selectedValue);
 
   const handleOptionClick = (value: string) => {
-    setValue(name, value);
+    setValue(source, value);
     setIsOpen(false);
     setQuery(value); // Update the query to reflect the selected option
   };
@@ -85,7 +85,7 @@ const ApplicationAutocompleteInput: React.FC<AutocompleteInputProps> = ({
         onChange={handleInputChange}
         onClick={() => setIsOpen(true)}
         className={`block w-full px-3 py-2 border rounded-md shadow-sm bg-white text-gray-900 focus:outline-none focus:ring-2 ${
-          errors[name]
+          errors[source]
             ? 'border-red-500 focus:ring-red-500'
             : 'border-gray-300 focus:ring-blue-500'
         }`}
@@ -103,11 +103,11 @@ const ApplicationAutocompleteInput: React.FC<AutocompleteInputProps> = ({
           ))}
         </div>
       )}
-      {helperText && !errors[name] && (
+      {helperText && !errors[source] && (
         <p className="text-gray-500 text-sm mt-1 text-left">{helperText}</p>
       )}
-      {errors[name] && (
-        <p className="text-red-500 text-sm mt-1 text-left">{`${errors[name]?.message}`}</p>
+      {errors[source] && (
+        <p className="text-red-500 text-sm mt-1 text-left">{`${errors[source]?.message}`}</p>
       )}
     </div>
   );

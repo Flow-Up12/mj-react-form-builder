@@ -2,7 +2,7 @@ import { useFormContext } from "react-hook-form";
 
 // Checkbox Input Component
 interface CheckboxInputProps {
-  name: string;
+  source: string;
   label: string;
   required?: boolean;
   helperText?: string;
@@ -10,7 +10,7 @@ interface CheckboxInputProps {
 }
 
 export const CheckboxInput = ({
-  name,
+  source,
   label,
   required = false,
   helperText,
@@ -24,11 +24,11 @@ export const CheckboxInput = ({
   } = useFormContext();
 
   // Get the current value of the checkbox
-  const isChecked = watch(name);
+  const isChecked = watch(source);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const checked = e.target.checked;
-    setValue(name, checked); // Update the form state
+    setValue(source, checked); // Update the form state
     if (onChange) {
       onChange(checked); // Trigger the custom onChange handler
     }
@@ -38,12 +38,12 @@ export const CheckboxInput = ({
     <div className="mb-4">
       <div className="flex items-center">
         <input
-          {...register(name, { required })}
+          {...register(source, { required })}
           type="checkbox"
           checked={isChecked}
           onChange={handleChange}
           className={`mr-2 h-4 w-4 ${
-            errors[name] ? "border-red-500" : "border-gray-300"
+            errors[source] ? "border-red-500" : "border-gray-300"
           }`}
         />
         <label className="block text-left text-sm font-semibold">
@@ -54,8 +54,8 @@ export const CheckboxInput = ({
       {helperText && (
         <p className="text-gray-500 text-sm mt-1 text-left">{helperText}</p>
       )}
-      {errors[name] && (
-        <p className="text-red-500 text-sm mt-1 text-left">{`${errors[name]?.message}*`}</p>
+      {errors[source] && (
+        <p className="text-red-500 text-sm mt-1 text-left">{`${errors[source]?.message}*`}</p>
       )}
     </div>
   );

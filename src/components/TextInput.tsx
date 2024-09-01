@@ -3,7 +3,7 @@ import { ChangeEvent } from "react";
 import { getError } from "../helpers/getError";
 
 interface InputProps {
-  name: string;
+  source: string;
   label: string;
   type?: string;
   required?: boolean;
@@ -14,7 +14,7 @@ interface InputProps {
 }
 
 export const TextInput = ({
-  name,
+  source,
   label,
   type = "text",
   required = false,
@@ -36,7 +36,7 @@ export const TextInput = ({
       value = transformInput(value);
     }
 
-    setValue(name, value);
+    setValue(source, value);
   };
 
   return (
@@ -47,22 +47,22 @@ export const TextInput = ({
       </label>
       <input
         type={type}
-        {...register(name, {
+        {...register(source, {
           required: required ? `${label} ${requiredMessage ? requiredMessage : 'is required'}` : false,
           maxLength: maxLength ? { value: maxLength, message: `${label} cannot exceed ${maxLength} characters` } : undefined,
         })}
         onChange={handleChange}
         className={`input-field text-left p-2 w-full border rounded-md focus:outline-none ${
-          getError(name)
+          getError(source)
             ? "border-red-500 focus:ring-2 focus:ring-red-500"
             : "border-gray-300 focus:ring-2 focus:ring-blue-800"
         }`}
       />
-      {helperText && !getError(name) && (
+      {helperText && !getError(source) && (
         <p className="text-gray-500 text-sm mt-1 text-left">{helperText}</p>
       )}
-      {getError(name) && (
-        <p className="text-red-500 text-sm mt-1 text-left">{`${getError(name)}*`}</p>
+      {getError(source) && (
+        <p className="text-red-500 text-sm mt-1 text-left">{`${getError(source)}*`}</p>
       )}
     </div>
   );
