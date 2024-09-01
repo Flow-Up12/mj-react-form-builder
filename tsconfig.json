@@ -1,7 +1,7 @@
 {
   "extends": "@tsconfig/node16/tsconfig.json",
   "compilerOptions": {
-    "lib": ["es2017", "es7", "es6", "dom", "ES2021"],
+    "lib": ["es2017", "dom"],
     "declaration": true,
     "module": "ESNext",
     "target": "ES6",
@@ -10,6 +10,6 @@
     "strict": true,
     "esModuleInterop": true
   },
-  "include": ["config", "src/**/*"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
 }
