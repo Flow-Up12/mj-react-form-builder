@@ -3,17 +3,16 @@
   "version": "2.0.20",
   "description": "A React form builder package using Tailwind CSS",
   "type": "module",
-  "main": "dist/mj-react-form-builder.cjs.js",
-  "module": "dist/mj-react-form-builder.es.js",
+  "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "build": "run-s build:*",
+    "build:clean": "rm -rf ./dist",
+    "build:tsc": "tsc",
+    "release": "npm run build && standard-version && git push --follow-tags && npm publish"
   },
   "files": [
-    "dist",
+    "dist/**/*",
     "index.css"
   ],
   "keywords": [
