@@ -2,20 +2,20 @@ import { useState, useEffect, useRef } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 interface MultiSelectProps {
-  source: string;
+  name: string;
   label: string;
   options: { value: string; label: string }[];
   required?: boolean;
   helperText?: string;
 }
 
-export const MultiSelectInput = ({ source, label, options, required = false, helperText }: MultiSelectProps) => {
+export const MultiSelectInput = ({ name, label, options, required = false, helperText }: MultiSelectProps) => {
   const { setValue, watch, formState: { errors }, register } = useFormContext();
   const [isOpen, setIsOpen] = useState(false);
   const [hoveredValue, setHoveredValue] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const formValues: string[] = watch(source) ?? [];
+  const formValues: string[] = watch(name) ?? [];
 
   const toggleDropdown = () => setIsOpen(prevState => !prevState);
 
@@ -23,7 +23,7 @@ export const MultiSelectInput = ({ source, label, options, required = false, hel
     const selectedOptions = formValues.includes(value)
       ? formValues.filter(item => item !== value)
       : [...formValues, value];
-    setValue(source, selectedOptions);
+    setValue(name, selectedOptions);
   };
 
   useEffect(() => {
@@ -44,9 +44,9 @@ export const MultiSelectInput = ({ source, label, options, required = false, hel
     // Ensure the selected values are still valid when options change
     const validSelectedOptions = formValues.filter(value => options.some(option => option.value === value));
     if (validSelectedOptions.length !== formValues.length) {
-      setValue(source, validSelectedOptions);
+      setValue(name, validSelectedOptions);
     }
-  }, [options, formValues, source, setValue]);
+  }, [options, formValues, name, setValue]);
 
   return (
     <div className="mb-6 relative" ref={dropdownRef}>
@@ -56,9 +56,9 @@ export const MultiSelectInput = ({ source, label, options, required = false, hel
       </label>
       <div className="relative">
         <div
-        {...register(source, { required: required ? `${label} is required` : false })}
+        {...register(name, { required: required ? `${label} is required` : false })}
           className={`block w-full px-3 py-2 border rounded-md shadow-sm bg-white text-gray-900 cursor-pointer focus:outline-none focus:ring-2 ${
-            errors[source]
+            errors[name]
               ? "border-red-500 focus:ring-red-500"
               : "border-gray-300 focus:ring-blue-500"
           }`}
@@ -130,8 +130,8 @@ export const MultiSelectInput = ({ source, label, options, required = false, hel
       {helperText &&  (
         <p className="text-gray-500 text-sm mt-1 text-left">{helperText}</p>
       )}
-      {errors[source] && (
-        <p className="text-red-500 text-sm mt-1 text-left">{`${errors[source]?.message}*`}</p>
+      {errors[name] && (
+        <p className="text-red-500 text-sm mt-1 text-left">{`${errors[name]?.message}*`}</p>
       )}
     </div>
   );

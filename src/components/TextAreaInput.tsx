@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 interface TextAreaProps {
-  source: string;
+  name: string;
   label: string;
   rows?: number;
   required?: boolean;
@@ -12,7 +12,7 @@ interface TextAreaProps {
 }
 
 const TextAreaInput = ({
-  source,
+  name,
   label,
   rows = 4,
   required = false,
@@ -41,7 +41,7 @@ const TextAreaInput = ({
 
     if (newRowCount <= maxRows) {
       setRowCount(newRowCount);
-      setValue(source, value); // Update the form value
+      setValue(name, value); // Update the form value
       setCharCount(value.length);
     } else {
       // Prevent input if max rows exceeded
@@ -66,7 +66,7 @@ const TextAreaInput = ({
         {required && <span className="text-red-500 ml-0.5">*</span>}
       </label>
       <textarea
-        {...register(source, {
+        {...register(name, {
           required: required ? `${label} is required` : false,
           maxLength: maxCharCount
             ? {
@@ -77,7 +77,7 @@ const TextAreaInput = ({
         })}
         rows={rows}
         className={`input-field block w-full border rounded-md p-2 focus:outline-none ${
-          errors[source]
+          errors[name]
             ? "border-red-500 focus:ring-2 focus:ring-red-500"
             : "border-gray-300 focus:ring-2 focus:ring-blue-800"
         }`}
@@ -91,11 +91,11 @@ const TextAreaInput = ({
       <p className="text-sm mt-1 text-left text-gray-500">
         {rowCount}/{maxRows} rows
       </p>
-      {helperText && !errors[source] && (
+      {helperText && !errors[name] && (
         <p className="text-gray-500 text-sm mt-1 text-left">{helperText}</p>
       )}
-      {errors[source] && (
-        <p className="text-red-500 text-sm mt-1 text-left">{`${errors[source]?.message}*`}</p>
+      {errors[name] && (
+        <p className="text-red-500 text-sm mt-1 text-left">{`${errors[name]?.message}*`}</p>
       )}
     </div>
   );

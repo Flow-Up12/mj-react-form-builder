@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 
 interface SelectInputProps {
-  source: string;
+  name: string;
   label: string;
   options: { value: string; label: string }[];
   required?: boolean;
@@ -10,7 +10,7 @@ interface SelectInputProps {
 }
 
 export const SelectInput = ({
-  source,
+  name,
   label,
   options,
   required = false,
@@ -20,14 +20,14 @@ export const SelectInput = ({
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const selectedValue = getValues(source);
+  const selectedValue = getValues(name);
 
   const handleSelectClick = () => {
     setIsOpen(prev => !prev);
   };
 
   const handleOptionClick = (value: string) => {
-    setValue(source, value);
+    setValue(name, value);
     setIsOpen(false);
   };
 
@@ -53,7 +53,7 @@ export const SelectInput = ({
       <div className="relative">
         <div
           className={`block w-full px-3 py-2 border rounded-md shadow-sm bg-white text-gray-900 cursor-pointer focus:outline-none focus:ring-2 ${
-            errors[source]
+            errors[name]
               ? "border-red-500 focus:ring-red-500"
               : "border-gray-300 focus:ring-blue-500"
           }`}
@@ -98,11 +98,11 @@ export const SelectInput = ({
           </div>
         )}
       </div>
-      {helperText && !errors[source] && (
+      {helperText && !errors[name] && (
         <p className="text-gray-500 text-sm mt-1 text-left">{helperText}</p>
       )}
-      {errors[source] && (
-        <p className="text-red-500 text-sm mt-1 text-left">{`${errors[source]?.message}`}</p>
+      {errors[name] && (
+        <p className="text-red-500 text-sm mt-1 text-left">{`${errors[name]?.message}`}</p>
       )}
     </div>
   );

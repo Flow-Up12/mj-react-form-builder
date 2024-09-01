@@ -14,7 +14,7 @@ export const ZipCodeInput: React.FC<ZipCodeInputProps> = ({ source }) => {
     <TextInput
       label="ZIP Code"
       transformInput={transformZipCodeInput}
-      source={source}
+      name={source}
       required
       maxLength={5}
     />
