@@ -1,22 +1,18 @@
 {
   "name": "mj-react-form-builder",
-  "version": "2.0.10",
+  "versizon": "2.0.26",
   "description": "A React form builder package using Tailwind CSS",
-  "type": "module",
-  "main": "dist/mj-react-form-builder.cjs.js",
-  "module": "dist/mj-react-form-builder.es.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/cjs/index.d.ts",
   "scripts": {
-    "clean": "rm -rf dist",
-    "build:types": "tsc --declaration --emitDeclarationOnly --outDir dist/tmp_types",
-    "bundle:types": "rollup -c rollup.config.js",
-    "build": "npm run clean && npm run build:types && npm run bundle:types && vite build",
-    "dev": "vite",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "build": "yarn build-cjs && yarn build-esm",
+    "build-cjs": "rimraf ./dist/cjs && tsc --outDir dist/cjs",
+    "build-esm": "rimraf ./dist/esm && tsc --outDir dist/esm --module es2015",
+    "release": "npm run build && standard-version && git push --follow-tags && npm publish"
   },
   "files": [
-    "dist",
+    "dist/**/*",
     "index.css"
   ],
   "keywords": [
@@ -32,23 +28,20 @@
     "react-dom": "^18.0.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.9.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "^4.3.1",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.5.3",
+    "@eslint/js": "^9.9.0",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.9.0",
-    "eslint-plugin-react-hooks": "^5.1.0-rc.0",
-    "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
-    "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
-    "vite": "^5.4.1",
-    "rollup": "^3.0.0",
-    "rollup-plugin-dts": "^5.0.0"
+    "vite": "^5.4.1"
   },
-  "packageManager": "yarn@1.22.22",
   "dependencies": {
+    "react-hook-form": "^7.53.0",
     "react-number-format": "^5.4.1"
-  }
+  },
+  "packageManager": "yarn@1.22.22"
 }

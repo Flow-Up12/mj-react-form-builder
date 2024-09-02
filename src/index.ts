@@ -18,9 +18,10 @@ export {FormSection} from './components/FormSection';
 
 // Providers
 
+export {useNotify} from './components/NotificationProvider';
 export {NotifyProvider} from './components/NotificationProvider';
 export {Form} from './components/FormProvider';
 
 // Services 
 
-export {uploadService} from './services/uploadService';
+// export {uploadService} from './services/uploadService';

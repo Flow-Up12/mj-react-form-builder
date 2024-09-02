@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 
-export interface SelectInputProps {
+interface SelectInputProps {
   source: string;
   label: string;
   options: { value: string; label: string }[];
