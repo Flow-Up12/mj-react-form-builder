@@ -28,7 +28,7 @@ export const MaskedPhoneInput: React.FC<MaskedPhoneInputProps> = ({ source }) =>
     <TextInput
       label="Phone"
       transformInput={transformPhoneInput}
-      name={source}
+      source={source}
       required
       maxLength={14}
     />
