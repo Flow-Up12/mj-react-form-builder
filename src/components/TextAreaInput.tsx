@@ -31,21 +31,21 @@ const TextAreaInput = ({
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     let value = event.target.value;
-
-    if (maxCharCount && value.length > maxCharCount) {
-      value = value.slice(0, maxCharCount);
-    }
-
+    
     // Calculate the current number of rows based on the new lines in the input
     const newRowCount = value.split("\n").length;
-
-    if (newRowCount <= maxRows) {
+  
+    if (newRowCount <= maxRows || newRowCount === rowCount) {
       setRowCount(newRowCount);
-      setValue(source, value); // Update the form value
+      setValue(source, value); 
       setCharCount(value.length);
     } else {
-      // Prevent input if max rows exceeded
+
       event.preventDefault();
+      
+      const trimmedValue = value.slice(0, value.lastIndexOf("\n"));
+      setValue(source, trimmedValue);
+      setCharCount(trimmedValue.length);
     }
   };
 
