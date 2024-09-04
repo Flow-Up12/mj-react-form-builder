@@ -1,36 +1,33 @@
-
-const VITE_API_ENDPOINT = process.env.VITE_API_ENDPOINT;
-const VITE_API_KEY = process.env.VITE_API_KEY;
-
 export const uploadService = {
-    uploadFile: async (file: File) => {
+    uploadFile: async (file: File, apiEndpoint: string, apiKey: string) => {
         const data = new FormData();
         data.append("files", file);
-        return fetch(`${VITE_API_ENDPOINT}/upload`, {
+        return fetch(`${apiEndpoint}/upload`, {
             method: "POST",
             body: data,
             headers: {
-                Authorization: `Bearer ${VITE_API_KEY}`,
+                Authorization: `Bearer ${apiKey}`,
             },
         })
-            .then((httpResponse) => httpResponse.json())
-            .then((data) => {
-                return data[0].id
-            });
+        .then((httpResponse) => httpResponse.json())
+        .then((data) => {
+            return data[0].id;
+        });
     },
-    uploadFiles: async (files: File[]) => {
+
+    uploadFiles: async (files: File[], apiEndpoint: string, apiKey: string) => {
         const formData = new FormData();
         files.forEach((file) => {
             formData.append("files", file);
         });
-        return fetch(`${VITE_API_ENDPOINT}/upload`, {
+        return fetch(`${apiEndpoint}/upload`, {
             method: "POST",
             body: formData,
             headers: {
-                Authorization: `Bearer ${VITE_API_KEY}`,
+                Authorization: `Bearer ${apiKey}`,
             },
         })
-            .then((httpResponse) => httpResponse.json())
-            .then((data) => data.map((file: any) => file.id));
+        .then((httpResponse) => httpResponse.json())
+        .then((data) => data.map((file: any) => file.id));
     },
 };
