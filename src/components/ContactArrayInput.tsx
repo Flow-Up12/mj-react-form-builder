@@ -103,6 +103,7 @@ export const ContactArrayInput = ({
               <MaskedPhoneInput
                 source={`${source}[${index}].phone`}
               />
+              <TextInput source={`${source}.title`} label="Title" />
             </div>
           ))}
         </div>
@@ -138,6 +139,7 @@ export const ContactArrayInput = ({
           />
         )}
         <MaskedPhoneInput source={`${source}.phone`}/>
+        <TextInput source={`${source}.title`} label="Title" />
         <p className="text-sm text-gray-500 text-left mt-2">{helperText}</p>
       </div>
     );
