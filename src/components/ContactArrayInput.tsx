@@ -44,7 +44,7 @@ export const ContactArrayInput = ({
     });
 
     return (
-      <div>
+      <div className="mb-4">
         <div className="flex justify-between items-center mb-4">
           <p className="text-left text-lg font-semibold">{label}</p>
           <button
