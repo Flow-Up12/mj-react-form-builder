@@ -9,7 +9,7 @@
     "build": "yarn build-cjs && yarn build-esm",
     "build-cjs": "rimraf ./dist/cjs && tsc --outDir dist/cjs",
     "build-esm": "rimraf ./dist/esm && tsc --outDir dist/esm --module es2015",
-    "release": "npm run build && standard-version && git push --follow-tags && npm publish"
+    "release": "npm run build && npm version patch && git push --follow-tags && npm publish"
   },
   "files": [
     "dist/**/*",
