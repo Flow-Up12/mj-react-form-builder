@@ -1,6 +1,6 @@
 
-const VITE_API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
-const VITE_API_KEY = import.meta.env.VITE_API_KEY;
+const VITE_API_ENDPOINT = process.env.VITE_API_ENDPOINT;
+const VITE_API_KEY = process.env.VITE_API_KEY;
 
 export const uploadService = {
     uploadFile: async (file: File) => {

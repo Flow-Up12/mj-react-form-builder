@@ -24,4 +24,4 @@ export {Form} from './components/FormProvider';
 
 // Services 
 
-// export {uploadService} from './services/uploadService';
+export {uploadService} from './services/uploadService';
