@@ -20,7 +20,7 @@ export const TextInput = ({
   required = false,
   helperText,
   requiredMessage,
-  transformInput, // very reusable
+  transformInput, 
   maxLength,
 }: InputProps) => {
   const { register, setValue} = useFormContext();

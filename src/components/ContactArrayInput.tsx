@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useFieldArray, useFormContext } from "react-hook-form";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { TextInput } from "./TextInput";
 import { MaskedPhoneInput } from "./MaskedPhoneInput";
+import { useFieldArray, useFormContext } from "react-hook-form";
 
 
 interface ContactArrayProps {
@@ -18,12 +18,15 @@ export const ContactArrayInput = ({
   label,
   helperText,
 }: ContactArrayProps) => {
+
   const { control, setValue, watch } = useFormContext();
   const [anonymousEmails, setAnonymousEmails] = useState<{ [key: string]: boolean }>({});
 
   const handleAnonymousEmail = (path: string, isChecked: boolean) => {
     const firstName = watch(`${path}.first`);
     const lastName = watch(`${path}.last`);
+
+    
 
     setAnonymousEmails((prev) => ({
       ...prev,
@@ -103,7 +106,7 @@ export const ContactArrayInput = ({
               <MaskedPhoneInput
                 source={`${source}[${index}].phone`}
               />
-              <TextInput source={`${source}.title`} label="Title" />
+              <TextInput source={`${source}[${index}].title`} label="Title" />
             </div>
           ))}
         </div>

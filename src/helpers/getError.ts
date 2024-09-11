@@ -5,15 +5,19 @@ export const getError = (name: string) => {
     formState: { errors },
   } = useFormContext();
 
-  const errorPath = name.split('.').reduce((acc, key) => {
-    // Handle case where key might represent an array index
-    if (acc && typeof acc === 'object' && key in acc) {
+  const errorPath = name.split(/[\.\[\]]+/).filter(Boolean).reduce((acc, key) => {
+    // If the accumulator is valid (an object or array)
+    if (acc && typeof acc === 'object') {
+      // If the key is a valid array index, access it as an index
+      if (Array.isArray(acc)) {
+        const index = parseInt(key, 10);
+        return acc[index];
+      }
+      // Otherwise, treat it as an object key
       return acc[key];
-    } else if (acc && Array.isArray(acc)) {
-      return acc[parseInt(key, 10)];
     }
     return undefined;
   }, errors);
 
-  return errorPath?.message;
+  return errorPath?.message || null;
 };
