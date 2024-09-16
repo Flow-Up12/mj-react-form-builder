@@ -3,6 +3,7 @@ import { ContactArrayInput } from './components/ContactArrayInput'
 import { TextInput } from './components/TextInput'
 import { useFormContext } from 'react-hook-form'
 import { FormSection } from './components/FormSection'
+import { SelectInput } from './components/SelectInput'
 
 const Test = () => {
 
@@ -30,6 +31,17 @@ const Test = () => {
     </button>
 
     <FormSection title="System Contacts">
+        <SelectInput 
+        onChange={(e) => {
+          console.log(e)
+        }}
+        source="type" label="Type" required options={[
+            { value: 'Primary', label: 'Primary' },
+            { value: 'Secondary', label: 'Secondary' },
+            { value: 'Billing', label: 'Billing' },
+            { value: 'Technical', label: 'Technical' },
+            { value: 'Emergency', label: 'Emergency' },
+        ]} />
           <ContactArrayInput isArray source="contacts" label="Contacts" />
       </FormSection>
   </div>
