@@ -7,6 +7,7 @@ interface SelectInputProps {
   options: { value: string; label: string }[];
   required?: boolean;
   helperText?: string;
+  onChange?: (value: string) => void;
 }
 
 export const SelectInput = ({
@@ -15,6 +16,7 @@ export const SelectInput = ({
   options,
   required = false,
   helperText,
+  onChange, 
 }: SelectInputProps) => {
   const { formState: { errors }, setValue, getValues } = useFormContext();
   const [isOpen, setIsOpen] = useState(false);
@@ -27,7 +29,13 @@ export const SelectInput = ({
   };
 
   const handleOptionClick = (value: string) => {
-    setValue(source, value);
+    // If onChange is provided, call it with the selected value
+    if (onChange) {
+      onChange(value);
+    } else {
+      // Otherwise, update the value using react-hook-form
+      setValue(source, value);
+    }
     setIsOpen(false);
   };
 
@@ -57,11 +65,10 @@ export const SelectInput = ({
               ? "border-red-500 focus:ring-red-500"
               : "border-gray-300 focus:ring-blue-500"
           }`}
-          onClick={handleSelectClick}
+          onClick={handleSelectClick} // Always handle the dropdown toggle with this
         >
-          <div className="flex items-cente ">
+          <div className="flex items-center">
             <div className="flex-1">
-              {selectedValue.length === 0 && <span className="text-gray-400">None Selected</span>}
               {selectedValue
                 ? options.find(option => option.value === selectedValue)?.label
                 : <span className="text-gray-400">Select {label}</span>}
@@ -89,12 +96,11 @@ export const SelectInput = ({
               <div
                 key={option.value}
                 className="px-4 py-2 cursor-pointer hover:bg-gray-100"
-                onClick={() => handleOptionClick(option.value)}
+                onClick={() => handleOptionClick(option.value)} // Pass the selected value to handleOptionClick
               >
                 {option.label}
               </div>
             ))}
-          
           </div>
         )}
       </div>
