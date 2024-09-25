@@ -34,7 +34,7 @@ export const SelectInput = ({
     register(source, {
       required: required ? `${label} ${requiredMessage ? requiredMessage : 'is required'}` : false,
     });
-  }, [register, source, required, requiredMessage, label]);
+  }, []);
 
   const selectedValue = getValues(source);
 
