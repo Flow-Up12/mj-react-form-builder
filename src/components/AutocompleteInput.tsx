@@ -1,3 +1,4 @@
+import { watch } from "fs";
 import { useState, useEffect, useRef, ChangeEvent } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -23,11 +24,11 @@ export const AutoCompleteInput = ({
   const {
     register,
     setValue,
+    getValues,
     formState: { errors },
   } = useFormContext();
   const [isOpen, setIsOpen] = useState(false);
   const [filteredOptions, setFilteredOptions] = useState(options);
-  const [inputValue, setInputValue] = useState("");
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Register the input with react-hook-form
@@ -40,7 +41,6 @@ export const AutoCompleteInput = ({
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    setInputValue(value);
     setFilteredOptions(
       options.filter((option) =>
         option.label.toLowerCase().includes(value.toLowerCase())
@@ -51,7 +51,6 @@ export const AutoCompleteInput = ({
 
   const handleOptionClick = (value: string, label: string) => {
     setValue(source, value);
-    setInputValue(label);
     if (onChange) {
       onChange(value);
     }
@@ -79,7 +78,7 @@ export const AutoCompleteInput = ({
       </label>
       <input
         type="text"
-        value={inputValue}
+        value={getValues(source)}
         onClick={() => setIsOpen(true)}
         onChange={handleInputChange}
         className={`block w-full px-3 py-2 border rounded-md shadow-sm bg-white text-gray-900 focus:outline-none focus:ring-2 ${
