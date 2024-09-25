@@ -37,11 +37,11 @@ const Test = () => {
         label="Name"
         required
         options={[
-          { value: 'Primary', label: 'Primary' },
-          { value: 'Secondary', label: 'Secondary' },
-          { value: 'Billing', label: 'Billing' },
-          { value: 'Technical', label: 'Technical' },
-          { value: 'Emergency', label: 'Emergency' },
+          { value: '1', label: 'Primary' },
+          { value: '2', label: 'Secondary' },
+          { value: '3', label: 'Billing' },
+          { value: '4', label: 'Technical' },
+          { value: '5', label: 'Emergency' },
         ]}
         />
         <SelectInput 

@@ -28,7 +28,7 @@ export const AutoCompleteInput = ({
   } = useFormContext();
   const [isOpen, setIsOpen] = useState(false);
   const [filteredOptions, setFilteredOptions] = useState(options);
-  const [inputValue, setInputValue] = useState(getValues(source) ?? "");
+  const [inputValue, setInputValue] = useState(options.filter((option) => option.value === getValues(source))[0]?.label || "");
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Register the input with react-hook-form
