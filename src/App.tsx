@@ -12,6 +12,7 @@ const App = () => {
     <Form
       defaultValues={{
         name: "Clearwater Utility",
+        // type: "Primary",
         region: "Region 1",
         office_hours: "9 AM - 5 PM",
         meters: 1500,

@@ -7,6 +7,7 @@ interface SelectInputProps {
   options: { value: string; label: string }[];
   required?: boolean;
   helperText?: string;
+  requiredMessage?: string;
   onChange?: (value: string) => void;
 }
 
@@ -16,25 +17,35 @@ export const SelectInput = ({
   options,
   required = false,
   helperText,
-  onChange, 
+  requiredMessage,
+  onChange,
 }: SelectInputProps) => {
-  const { formState: { errors }, setValue, getValues } = useFormContext();
+  const {
+    register,
+    setValue,
+    getValues,
+    formState: { errors },
+  } = useFormContext();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Register the input with react-hook-form
+  useEffect(() => {
+    register(source, {
+      required: required ? `${label} ${requiredMessage ? requiredMessage : 'is required'}` : false,
+    });
+  }, [register, source, required, requiredMessage, label]);
 
   const selectedValue = getValues(source);
 
   const handleSelectClick = () => {
-    setIsOpen(prev => !prev);
+    setIsOpen((prev) => !prev);
   };
 
   const handleOptionClick = (value: string) => {
-    // If onChange is provided, call it with the selected value
+    setValue(source, value);
     if (onChange) {
       onChange(value);
-    } else {
-      // Otherwise, update the value using react-hook-form
-      setValue(source, value);
     }
     setIsOpen(false);
   };
@@ -46,9 +57,9 @@ export const SelectInput = ({
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -65,12 +76,12 @@ export const SelectInput = ({
               ? "border-red-500 focus:ring-red-500"
               : "border-gray-300 focus:ring-blue-500"
           }`}
-          onClick={handleSelectClick} // Always handle the dropdown toggle with this
+          onClick={handleSelectClick}
         >
           <div className="flex items-center">
             <div className="flex-1">
               {selectedValue
-                ? options.find(option => option.value === selectedValue)?.label
+                ? options.find((option) => option.value === selectedValue)?.label
                 : <span className="text-gray-400">Select {label}</span>}
             </div>
           </div>
@@ -96,7 +107,7 @@ export const SelectInput = ({
               <div
                 key={option.value + index}
                 className="px-4 py-2 cursor-pointer hover:bg-gray-100"
-                onClick={() => handleOptionClick(option.value)} // Pass the selected value to handleOptionClick
+                onClick={() => handleOptionClick(option.value)}
               >
                 {option.label}
               </div>
@@ -108,7 +119,7 @@ export const SelectInput = ({
         <p className="text-gray-500 text-sm mt-1 text-left">{helperText}</p>
       )}
       {errors[source] && (
-        <p className="text-red-500 text-sm mt-1 text-left">{`${errors[source]?.message}`}</p>
+        <p className="text-red-500 text-sm mt-1 text-left">{`${errors[source]?.message}*`}</p>
       )}
     </div>
   );
