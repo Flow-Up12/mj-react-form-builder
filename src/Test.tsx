@@ -4,6 +4,7 @@ import { TextInput } from './components/TextInput'
 import { useFormContext } from 'react-hook-form'
 import { FormSection } from './components/FormSection'
 import { SelectInput } from './components/SelectInput'
+import { AutoCompleteInput } from './components/AutocompleteInput'
 
 const Test = () => {
 
@@ -31,6 +32,18 @@ const Test = () => {
     </button>
 
     <FormSection title="System Contacts">
+      <AutoCompleteInput 
+        source="name"
+        label="Name"
+        required
+        options={[
+          { value: 'Primary', label: 'Primary' },
+          { value: 'Secondary', label: 'Secondary' },
+          { value: 'Billing', label: 'Billing' },
+          { value: 'Technical', label: 'Technical' },
+          { value: 'Emergency', label: 'Emergency' },
+        ]}
+        />
         <SelectInput 
         onChange={(e) => {
           console.log(e)
