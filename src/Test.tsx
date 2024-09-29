@@ -5,6 +5,7 @@ import { useFormContext } from 'react-hook-form'
 import { FormSection } from './components/FormSection'
 import { SelectInput } from './components/SelectInput'
 import { AutoCompleteInput } from './components/AutocompleteInput'
+import { FileInput } from './components/FileInput'
 
 const Test = () => {
 
@@ -32,6 +33,13 @@ const Test = () => {
     </button>
 
     <FormSection title="System Contacts">
+      <FileInput
+        source="file"
+        label="File"
+        required
+        multiple
+        helperText="Upload a file"
+      />
       <AutoCompleteInput 
         source="name"
         label="Name"

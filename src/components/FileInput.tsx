@@ -99,7 +99,7 @@ export const FileInput = ({
                     href={file.src}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-500 hover:underline truncate"
+                    className="text-blue-500 hover:underline truncate mt-2"
                     title={file.title} // Tooltip text
                   >
                     {file.title}
