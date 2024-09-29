@@ -24,10 +24,13 @@ export const SelectInput = ({
     register,
     setValue,
     getValues,
+    watch,
     formState: { errors },
   } = useFormContext();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const value = watch(source);
 
   // Register the input with react-hook-form
   useEffect(() => {
@@ -62,6 +65,11 @@ export const SelectInput = ({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+   
+  }, [value]);
+
 
   return (
     <div className="mb-6 relative" ref={dropdownRef}>
