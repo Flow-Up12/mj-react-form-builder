@@ -4,7 +4,7 @@ interface FormProps {
     children: React.ReactNode;
     defaultValues?: Record<string, any>;
     test?: boolean;
-    onSubmit: (data: Record<string, any>) => void;
+    onSubmit?: (data: Record<string, any>) => void;
 }
 
 const Form = ({ children, onSubmit, defaultValues }: FormProps) => {
@@ -13,7 +13,7 @@ const Form = ({ children, onSubmit, defaultValues }: FormProps) => {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <form onSubmit={onSubmit ? methods.handleSubmit(onSubmit) : undefined}>
         {children}
       </form>
     </FormProvider>
