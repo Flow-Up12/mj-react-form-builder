@@ -3,9 +3,10 @@ import { TextInput } from './TextInput';
 
 interface MaskedPhoneInputProps {
   source: string;
+  required?: boolean;
 }
 
-export const MaskedPhoneInput: React.FC<MaskedPhoneInputProps> = ({ source }) => {
+export const MaskedPhoneInput: React.FC<MaskedPhoneInputProps> = ({ source, required }) => {
   const transformPhoneInput = (value: string) => {
     value = value.replace(/[^\d]/g, ''); // Remove non-digit characters
     const formattedValue = value.replace(
@@ -29,7 +30,7 @@ export const MaskedPhoneInput: React.FC<MaskedPhoneInputProps> = ({ source }) =>
       label="Phone"
       transformInput={transformPhoneInput}
       source={source}
-      required
+      required={required}
       maxLength={14}
     />
   );
