@@ -38,7 +38,8 @@ const NumberInput = ({
 
   const handleValueChange = (values: any) => {
     const { floatValue } = values;
-    setValue(source, floatValue);
+    // If the value is null or undefined, set it to 0
+    setValue(source, floatValue !== undefined && floatValue !== null ? floatValue : 0);
   };
 
   return (
@@ -74,6 +75,7 @@ const NumberInput = ({
         suffix={mask === "percentage" ? "%" : undefined}
         onValueChange={handleValueChange}
         value={number}
+        defaultValue={0}
         allowNegative={false}
         decimalScale={decimalScale}
         isAllowed={(values) => {
