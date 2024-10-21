@@ -37,9 +37,12 @@ const NumberInput = ({
   const number = watch(source);
 
   const handleValueChange = (values: any) => {
-    const { floatValue } = values;
-    // If the value is null or undefined, set it to 0
-    setValue(source, floatValue !== undefined && floatValue !== null ? floatValue : 0);
+    const { floatValue, value } = values;
+    if (value === "" || floatValue === undefined || floatValue === null) {
+      setValue(source, 0);
+    } else {
+      setValue(source, floatValue);
+    }
   };
 
   return (
@@ -100,7 +103,6 @@ const NumberInput = ({
             {`${label} must be less than or equal to ${max}`}
           </p>
         )}
-
       {number !== undefined &&
         number !== null &&
         min !== undefined &&
