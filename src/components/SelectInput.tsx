@@ -24,20 +24,24 @@ export const SelectInput = ({
     register,
     setValue,
     getValues,
-    watch,
     formState: { errors },
+    unregister,
   } = useFormContext();
+  
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const value = watch(source);
-
   // Register the input with react-hook-form
   useEffect(() => {
+
     register(source, {
       required: required ? `${label} ${requiredMessage ? requiredMessage : 'is required'}` : false,
     });
-  }, []);
+
+    return () => {
+      unregister(source);
+    };
+  }, [] );
 
   const selectedValue = getValues(source);
 
@@ -65,11 +69,6 @@ export const SelectInput = ({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
-  useEffect(() => {
-   
-  }, [value]);
-
 
   return (
     <div className="mb-6 relative" ref={dropdownRef}>

@@ -6,6 +6,7 @@ import { FormSection } from './components/FormSection'
 import { SelectInput } from './components/SelectInput'
 import { AutoCompleteInput } from './components/AutocompleteInput'
 import { FileInput } from './components/FileInput'
+import { NumberInput } from './components/NumberInput'
 
 const Test = () => {
 
@@ -33,13 +34,23 @@ const Test = () => {
     </button>
 
     <FormSection title="System Contacts">
-      <FileInput
+    
+      {/* <FileInput
         source="file"
         label="File"
         required
         multiple
         helperText="Upload a file"
-      />
+      /> */}
+      <NumberInput
+        source="number"
+        label="Number"
+        required
+        min={0}
+        max={100}
+        maxLength={3}
+        helperText="Enter a number"
+        />
       <AutoCompleteInput 
         source="name"
         label="Name"
