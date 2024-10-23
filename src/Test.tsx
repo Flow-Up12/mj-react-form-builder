@@ -73,7 +73,7 @@ const Test = () => {
               console.log(e);
             }}
             source="type"
-            label="Type"
+            label="How would you like to receive the ORWA Membership Directory?"
             required
             options={[
               { value: 'Primary', label: 'Primary' },
