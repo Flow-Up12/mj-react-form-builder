@@ -24,24 +24,11 @@ export const SelectInput = ({
     register,
     setValue,
     getValues,
+    watch,
     formState: { errors },
-    unregister,
   } = useFormContext();
-  
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-
-  // Register the input with react-hook-form
-  useEffect(() => {
-
-    register(source, {
-      required: required ? `${label} ${requiredMessage ? requiredMessage : 'is required'}` : false,
-    });
-
-    return () => {
-      unregister(source);
-    };
-  }, [] );
 
   const selectedValue = getValues(source);
 
@@ -59,7 +46,10 @@ export const SelectInput = ({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
@@ -71,7 +61,15 @@ export const SelectInput = ({
   }, []);
 
   return (
-    <div className="mb-6 relative" ref={dropdownRef}>
+    <div
+      {...register(source, {
+        required: required
+          ? `${label} ${requiredMessage ? requiredMessage : "is required"}`
+          : false,
+      })}
+      className="mb-6 relative"
+      ref={dropdownRef}
+    >
       <label className="block mb-1 text-left text-sm font-bold">
         {label}
         {required && <span className="text-red-500 ml-1">*</span>}
@@ -87,9 +85,11 @@ export const SelectInput = ({
         >
           <div className="flex items-center">
             <div className="flex-1">
-              {selectedValue
-                ? options.find((option) => option.value === selectedValue)?.label
-                : <span className="text-gray-400">Select {label}</span>}
+              {selectedValue ? (
+                options.find((option) => option.value === selectedValue)?.label
+              ) : (
+                <span className="text-gray-400">Select {label}</span>
+              )}
             </div>
           </div>
           <svg
