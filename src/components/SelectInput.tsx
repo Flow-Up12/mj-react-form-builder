@@ -67,7 +67,7 @@ export const SelectInput = ({
 
         {errors[source] && (
           <p className="text-red-500 text-sm mt-1 text-left">
-            {`${errors[source]?.message}`}
+            {`${errors[source]?.message}*`}
           </p>
         )}
       </div>
