@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { useFormContext } from "react-hook-form";
 
 interface SelectInputProps {
@@ -64,16 +64,12 @@ export const SelectInput = ({
             </option>
           ))}
         </select>
-        <div
-          className="absolute max-h-60 overflow-auto mt-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-          style={{ zIndex: 10 }}
-        >
-          {errors[source] && (
-            <p className="text-red-500 text-sm mt-1 text-left">
-              {`${errors[source]?.message}`}
-            </p>
-          )}
-        </div>
+
+        {errors[source] && (
+          <p className="text-red-500 text-sm mt-1 text-left">
+            {`${errors[source]?.message}`}
+          </p>
+        )}
       </div>
       {helperText && !errors[source] && (
         <p className="text-gray-500 text-sm mt-1 text-left">{helperText}</p>
