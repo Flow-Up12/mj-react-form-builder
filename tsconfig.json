@@ -1,27 +1,26 @@
 {
+  "extends": "@tsconfig/node16/tsconfig.json",
   "compilerOptions": {
-    "jsx": "react",
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
+    "target": "es6",                  // Target ES6 for better compatibility
+    "module": "esnext",               // Use ESNext modules for tree-shaking
+    "lib": ["dom", "esnext"],         // Include DOM and ESNext libraries
+    "jsx": "react",                   // Support JSX for React
+    "declaration": true,              // Generate `.d.ts` declaration files
+    "declarationMap": true,           // Generate source maps for declarations
+    "sourceMap": true,                // Generate source maps for debugging
+    "outDir": "./dist",               // Output compiled files into `dist` folder
+    "moduleResolution": "node",       // Use Node module resolution
+    "strict": true,                   // Enable all strict type checks
+    "esModuleInterop": true,          // Enable ES module interop for compatibility
     "allowSyntheticDefaultImports": true,
-    "strict": true,
+    "resolveJsonModule": true,        // Allow importing JSON files
+    "skipLibCheck": true,             // Skip library type checking for faster builds
+    "isolatedModules": true,          // Ensure each file is treated as a module
     "forceConsistentCasingInFileNames": true,
+    "removeComments": true,           // Remove comments in output files
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "sourceMap": true,                 // Generate source maps for debugging
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
+    "allowJs": true                    // Allow JavaScript files if needed
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "example", "**/*.test.ts", "**/*.spec.ts"]
 }
-
