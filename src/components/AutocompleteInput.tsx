@@ -95,7 +95,7 @@ export const AutoCompleteInput = ({
           {filteredOptions.map((option, index) => (
             <div
               key={option.value + index}
-              className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+              className="px-4 py-2 cursor-pointer hover:bg-gray-100 text-left"
               onClick={() => handleOptionClick(option.value, option.label)}
             >
               {option.label}
