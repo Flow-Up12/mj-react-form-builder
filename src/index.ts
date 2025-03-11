@@ -12,6 +12,7 @@ export {TextAreaInput} from './components/TextAreaInput';
 export {ZipCodeInput} from './components/ZipCodeInput';
 export {SelectStateInput} from './components/SelectStateInput';
 export {AutoCompleteInput} from './components/AutocompleteInput';
+export {EmailInput} from './components/EmailInput';
 
 // Layouts
 
