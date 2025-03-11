@@ -1,42 +1,32 @@
-import React from 'react';
+import React from "react";
 import { useFormContext } from "react-hook-form";
 import { ChangeEvent } from "react";
 import { getError } from "../helpers/getError";
 
-interface InputProps {
+interface EmailInputProps {
   source: string;
   label: string;
-  type?: string;
   required?: boolean;
   helperText?: string;
   requiredMessage?: string;
-  transformInput?: (value: string) => string;
   maxLength?: number;
-  validate?: (value: string) => string | boolean; // Custom validation function
 }
 
-export const TextInput = ({
+export const EmailInput = ({
   source,
   label,
-  type = "text",
   required = false,
   helperText,
   requiredMessage,
-  transformInput, 
   maxLength,
-  validate,
-}: InputProps) => {
-  const { register, setValue} = useFormContext();
+}: EmailInputProps) => {
+  const { register, setValue } = useFormContext();
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     let value = event.target.value;
 
     if (maxLength && value.length > maxLength) {
       value = value.slice(0, maxLength);
-    }
-
-    if (transformInput) {
-      value = transformInput(value);
     }
 
     setValue(source, value);
@@ -49,11 +39,14 @@ export const TextInput = ({
         {required && <span className="text-red-500 ml-0.5">*</span>}
       </label>
       <input
-        type={type}
+        type="email"
         {...register(source, {
-          required: required ? `${label} ${requiredMessage ? requiredMessage : 'is required'}` : false,
+          required: required ? `${label} ${requiredMessage ? requiredMessage : "is required"}` : false,
           maxLength: maxLength ? { value: maxLength, message: `${label} cannot exceed ${maxLength} characters` } : undefined,
-          validate: validate || undefined, 
+          pattern: {
+            value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+            message: "Invalid email format",
+          },
         })}
         onChange={handleChange}
         className={`input-field text-left p-2 w-full border rounded-md focus:outline-none ${
