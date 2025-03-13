@@ -9,6 +9,7 @@ interface SelectInputProps {
   helperText?: string;
   requiredMessage?: string;
   onChange?: (value: string) => void;
+  defualtValue?: string;
 }
 
 export const SelectInput = ({
@@ -19,6 +20,7 @@ export const SelectInput = ({
   helperText,
   requiredMessage,
   onChange,
+  defualtValue,
 }: SelectInputProps) => {
   const {
     register,
@@ -50,6 +52,7 @@ export const SelectInput = ({
               ? `${label} ${requiredMessage ? requiredMessage : "is required"}`
               : false,
           })}
+          defaultValue={defualtValue}
           onChange={(e) => {
             setValue(source, e.target.value);
             if (onChange) {
